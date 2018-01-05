@@ -26,5 +26,11 @@ module.exports = {
 		} catch (err) {
 			return false;
 		}
+	},
+	isWithinRange : function(value, range) {
+		return (value >= range[0] && value <= range[1]);
+	},
+	isWithinMaxLength : function(value, maxlength) {
+		return (value.length <= maxlength);
 	}
 }

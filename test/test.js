@@ -12,7 +12,8 @@ describe('Input Validation Summary', () => {
 			field3 : 1.1,
 			field4 : false,
 			field5 : {},
-			field6 : "{}"		
+			field6 : "{}",
+			field7 : 10
 		}
 		try {
 			result = new TestClassDto(testInput);
@@ -30,7 +31,7 @@ describe('Input Validation Summary', () => {
 		} catch(e) {
 			result = e;
 		}
-		assert.equal(result, "Missing required field : field1");
+		assert.equal(result, "Missing required fields : field1");
 	});
 
 	it("should catch invalid field names", () => {
@@ -114,5 +115,41 @@ describe('Input Validation Summary', () => {
 			result = e;
 		}
 		assert.equal(result, "Invalid input : field6. Expected Serialized Object value");
+	});
+
+	it("should test range specification for Integer", () => {
+		try {
+			result = new TestClassDto({
+				field1 : 1,
+				field7 : -1
+			});
+		} catch(e) {
+			result = e;
+		}
+		assert.equal(result, "Invalid input : field7. Out of specified range : 0,10");
+	});
+
+	it("should test range specification for Float", () => {
+		try {
+			result = new TestClassDto({
+				field1 : 1,
+				field3 : 10.1
+			});
+		} catch(e) {
+			result = e;
+		}
+		assert.equal(result, "Invalid input : field3. Out of specified range : 0,10");
+	});
+
+	it("should test max length for String", () => {
+		try {
+			result = new TestClassDto({
+				field1 : 1,
+				field2 : "123456789"
+			});
+		} catch(e) {
+			result = e;
+		}
+		assert.equal(result, "Invalid input : field2. Length of value exceeds specified max length.");
 	});
 });
