@@ -24,6 +24,10 @@ DTO.prototype.create = function(definition, input) {
     }
 };
 
+DTO.prototype.mapTo = function(domainObject, dtoDefinition, map) {
+    return this.map.mapTo(domainObject, dtoDefinition, map);
+};
+
 /*
     Validate all of the input fields against the object definition
 */

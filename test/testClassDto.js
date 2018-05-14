@@ -1,3 +1,7 @@
+/*
+    A DTO definition
+*/
+
 const DTO = require("../index");
 
 module.exports = {
@@ -24,6 +28,6 @@ module.exports = {
     },
     field7 : {
         type : DTO.INTEGER,
-        range : [0, 10]
+        range : [0, 12]
     }
 };

@@ -3,6 +3,8 @@ const assert = chai.assert;
 
 const DTO = require("../index");
 const TestClassDto = require("./testClassDto");
+const TestClassDomain = require("./testClassDomain");
+const TestClassMap = require("./testClassMap");
 
 describe('Input Validation Summary', () => {
 
@@ -137,7 +139,7 @@ describe('Input Validation Summary', () => {
 		} catch(e) {
 			result = e;
 		}
-		assert.equal(result, "Invalid input : field7. Reason : Value -1 is outside of specified range : 0,10");
+		assert.equal(result, "Invalid input : field7. Reason : Value -1 is outside of specified range : 0,12");
 	});
 
 	it("should test range specification for Float", () => {
@@ -165,4 +167,14 @@ describe('Input Validation Summary', () => {
 		}
 		assert.equal(result, "Invalid input : field2. Reason : Length of value exceeds specified max length.");
 	});
+
+	it("should map a domain object to a DTO object", () => {
+		let result;
+		try {
+			result = DTO.mapTo(TestClassDomain, TestClassDto, TestClassMap);
+		} catch(e) {
+			result = e;
+		}
+		assert.equal(JSON.stringify(result), "{\"field4\":false,\"field2\":\"The Name\",\"field7\":12}");
+	})
 });
