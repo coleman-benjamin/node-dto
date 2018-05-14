@@ -1,37 +1,29 @@
 const DTO = require("../index");
 
-const TestClassDto = {
+module.exports = {
     field1 : {
-        type : DTO.datatype.INTEGER,
+        type : DTO.INTEGER,
         required : true
     },
     field2 : {
-        type : DTO.datatype.STRING,
+        type : DTO.STRING,
         maxlength : 8
     },
     field3 : {
-        type : DTO.datatype.FLOAT,
+        type : DTO.FLOAT,
         range : [0, 10]
     },
     field4 : {
-        type : DTO.datatype.BOOLEAN
+        type : DTO.BOOLEAN
     },
     field5 : {
-        type : DTO.datatype.OBJECT
+        type : DTO.OBJECT
     },
     field6 : {
-        type : DTO.datatype.SERIALIZED_OBJECT
+        type : DTO.SERIALIZED_OBJECT
     },
     field7 : {
-        type : DTO.datatype.INTEGER,
+        type : DTO.INTEGER,
         range : [0, 10]
-    }
-};
-
-module.exports = function(input) {
-    try {
-        return DTO.create(TestClassDto, input);
-    } catch(e) {
-        throw e;
     }
 };
