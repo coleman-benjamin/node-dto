@@ -2,7 +2,9 @@ const validation = require("./src/validation");
 const mapper = require("./src/map");
 
 module.exports = {
-    // Labels for types when creating a DTO definition - see /src/type.js for mappings
+    /*
+        Labels for types when creating a DTO definition - see /src/type.js for mappings
+    */
     INTEGER : "_INTEGER",
     FLOAT : "_FLOAT",
     STRING : "_STRING",
@@ -10,6 +12,9 @@ module.exports = {
     OBJECT : "_OBJECT",
     SERIALIZED_OBJECT : "_SERIALIZED_OBJECT",
 
+    /*
+        Tests input data against the DTO definition, and returns input untouched if all valid.
+    */
     test : function(input, dtoDefinition, callback) {
         try {
             validation.testFieldNames(dtoDefinition, input);
@@ -21,6 +26,9 @@ module.exports = {
         }
     },
 
+    /*
+        Maps domain object to DTO object
+    */
     mapTo : function(domainObject, dtoDefinition, map, callback) {
         try {
             let mappedDto = mapper.mapTo(domainObject, dtoDefinition, map);
