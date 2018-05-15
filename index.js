@@ -1,5 +1,6 @@
 const validation = require("./src/validation");
 const mapper = require("./src/map");
+const load = require("./src/load");
 
 module.exports = {
     /*
@@ -29,12 +30,29 @@ module.exports = {
     /*
         Maps domain object to DTO object
     */
-    mapTo : function(domainObject, dtoDefinition, map, callback) {
+    mapTo : function(mapId, domainObject, dtoDefinition, callback) {
         try {
-            let mappedDto = mapper.mapTo(domainObject, dtoDefinition, map);
+            let mappedDto = mapper.mapTo(mapId, domainObject, dtoDefinition);
             callback(null, mappedDto);
         } catch(e) {
             callback(e);
+        }
+    },
+
+    /*
+        Register a mapping
+    */
+    addMap : function(mapId, map) {
+        mapper.addMap(mapId, map);
+    },
+
+    /*
+        Register all mappings within a directory
+    */
+    registerMappings : function(mappingDir) {
+        let functionsList = load.loadFunctionsListByPath(mappingDir);
+        for (let f in functionsList) {
+            mapper.addMap(f, functionsList[f]);
         }
     }
 };

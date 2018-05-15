@@ -1,9 +1,18 @@
 module.exports = {
 
 	/*
+		For storing added mappings.
+	*/
+	mappings : {},
+
+	addMap : function(mapId, map) {
+		this.mappings[mapId] = map;
+	},
+
+	/*
 		Map a domain object to the defined DTO
 	*/
-    mapTo : function(domainObject, dtoDefinition, map) {
+    mapTo : function(mapId, domainObject, dtoDefinition) {
         let returnObj = {};
 
         // Check for fields in DTO definition with the same name
@@ -12,11 +21,11 @@ module.exports = {
                 returnObj[field] = domainObject[field];
             }
         }
-
+		console.log(this.mappings);
         // Check for mapped fields defined in the map
-        if (map) {
-            map(domainObject, returnObj);
-        }
+		if (mapId && this.mappings[mapId]) {
+			this.mappings[mapId](domainObject, returnObj);
+		}
 
         return returnObj;
     }
