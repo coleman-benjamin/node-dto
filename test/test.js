@@ -20,7 +20,7 @@ describe('Input Validation Summary', () => {
 		};
 		let result;
 		try {
-			result = DTO.create(TestClassDto, testInput);
+			result = DTO.test(TestClassDto, testInput);
 		} catch(e) {
 			result = e;
 		}
@@ -30,7 +30,7 @@ describe('Input Validation Summary', () => {
 	it("should validate required fields", () => {
         let result;
 		try {
-			result = DTO.create(TestClassDto, {
+			result = DTO.test(TestClassDto, {
 				field2 : "whatever"
 			});
 		} catch(e) {
@@ -42,7 +42,7 @@ describe('Input Validation Summary', () => {
 	it("should catch invalid field names", () => {
         let result;
 		try {
-			result = DTO.create(TestClassDto, {
+			result = DTO.test(TestClassDto, {
 				field1 : 1,
 				bort : "whatever"
 			});
@@ -55,7 +55,7 @@ describe('Input Validation Summary', () => {
 	it("should test Integer type", () => {
         let result;
 		try {
-			result = DTO.create(TestClassDto, {
+			result = DTO.test(TestClassDto, {
 				field1 : "not an int"
 			});
 		} catch(e) {
@@ -67,7 +67,7 @@ describe('Input Validation Summary', () => {
 	it("should test String type", () => {
         let result;
 		try {
-			result = DTO.create(TestClassDto, {
+			result = DTO.test(TestClassDto, {
 				field1 : 1,
 				field2 : 2
 			});
@@ -80,7 +80,7 @@ describe('Input Validation Summary', () => {
 	it("should test Float type", () => {
         let result;
 		try {
-			result = DTO.create(TestClassDto, {
+			result = DTO.test(TestClassDto, {
 				field1 : 1,
 				field3 : "not a float"
 			});
@@ -93,7 +93,7 @@ describe('Input Validation Summary', () => {
 	it("should test Boolean type", () => {
         let result;
 		try {
-			result = DTO.create(TestClassDto, {
+			result = DTO.test(TestClassDto, {
 				field1 : 1,
 				field4 : 42
 			});
@@ -106,7 +106,7 @@ describe('Input Validation Summary', () => {
 	it("should test Object type", () => {
         let result;
 		try {
-			result = DTO.create(TestClassDto, {
+			result = DTO.test(TestClassDto, {
 				field1 : 1,
 				field5 : true
 			});
@@ -119,7 +119,7 @@ describe('Input Validation Summary', () => {
 	it("should test Serialized Object type", () => {
         let result;
 		try {
-			result = DTO.create(TestClassDto, {
+			result = DTO.test(TestClassDto, {
 				field1 : 1,
 				field6 : {}
 			});
@@ -132,7 +132,7 @@ describe('Input Validation Summary', () => {
 	it("should test range specification for Integer", () => {
         let result;
 		try {
-			result = DTO.create(TestClassDto, {
+			result = DTO.test(TestClassDto, {
 				field1 : 1,
 				field7 : -1
 			});
@@ -145,7 +145,7 @@ describe('Input Validation Summary', () => {
 	it("should test range specification for Float", () => {
         let result;
 		try {
-			result = DTO.create(TestClassDto, {
+			result = DTO.test(TestClassDto, {
 				field1 : 1,
 				field3 : 10.1
 			});
@@ -158,7 +158,7 @@ describe('Input Validation Summary', () => {
 	it("should test max length for String", () => {
         let result;
 		try {
-			result = DTO.create(TestClassDto, {
+			result = DTO.test(TestClassDto, {
 				field1 : 1,
 				field2 : "123456789"
 			});
