@@ -18,15 +18,15 @@ describe('Input Validation Summary', () => {
 			field6 : "{}",
 			field7 : 10
 		};
-		let result;
-
 		DTO.test(testInput, TestClassDto, (err, result) => {
             assert.equal(result, testInput);
 		});
 	});
 
 	it("should validate required fields", () => {
-		let testInput = { field2 : "whatever" };
+		let testInput = {
+			field2 : "whatever"
+		};
 		DTO.test(testInput, TestClassDto, (err) => {
             assert.equal(err, "Missing required fields : field1");
 		});
@@ -130,6 +130,16 @@ describe('Input Validation Summary', () => {
             assert.equal(err, "Invalid input : field2. Reason : Length of value exceeds specified max length.");
         });
 	});
+
+    it("should test min length for String", () => {
+        let testInput = {
+            field1 : 1,
+            field2 : "1"
+        };
+        DTO.test(testInput, TestClassDto, (err) => {
+            assert.equal(err, "Invalid input : field2. Reason : Length of value less than specified min length.");
+        });
+    });
 
 	it("should map a domain object to a DTO object", () => {
         DTO.mapTo(TestClassDomain, TestClassDto, TestClassMap, (err, result) => {

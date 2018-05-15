@@ -11,7 +11,8 @@ module.exports = {
     },
     field2 : {
         type : DTO.STRING,
-        maxlength : 8
+        maxlength : 8,
+        minlength : 2
     },
     field3 : {
         type : DTO.FLOAT,
