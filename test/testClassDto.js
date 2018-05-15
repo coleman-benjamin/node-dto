@@ -1,5 +1,5 @@
 /*
-    A DTO definition
+    An example DTO definition
 */
 
 const DTO = require("../index");

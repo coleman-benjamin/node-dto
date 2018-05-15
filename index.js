@@ -3,7 +3,7 @@ const mapper = require("./src/map");
 
 const DTO = function() {
 
-	// Labels for datatypes when creating a DTO definition - see /src/datatype.js for mappings
+	// Labels for types when creating a DTO definition - see /src/type.js for mappings
 	this.INTEGER = "_INTEGER";
 	this.FLOAT = "_FLOAT";
 	this.STRING = "_STRING";
@@ -29,7 +29,7 @@ DTO.prototype.test = function(input, dtoDefinition, callback) {
 
 /*
     Maps
- */
+*/
 DTO.prototype.mapTo = function(domainObject, dtoDefinition, map, callback) {
     try {
         let mappedDto = mapper.mapTo(domainObject, dtoDefinition, map);

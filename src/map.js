@@ -1,18 +1,23 @@
-const Map = function() {};
+module.exports = {
 
-Map.prototype.mapTo = function(domainObject, dtoDefinition, map) {
-	let returnObj = {};
-	for (let field in domainObject) {
-		if (dtoDefinition.hasOwnProperty(field)) {
-			returnObj[field] = domainObject[field];
-		}
-	}
+	/*
+		Map a domain object to the defined DTO
+	*/
+    mapTo : function(domainObject, dtoDefinition, map) {
+        let returnObj = {};
 
-	if (map) {
-        map(domainObject, returnObj);
-	}
+        // Check for fields in DTO definition with the same name
+        for (let field in domainObject) {
+            if (dtoDefinition.hasOwnProperty(field)) {
+                returnObj[field] = domainObject[field];
+            }
+        }
 
-	return returnObj;
+        // Check for mapped fields defined in the map
+        if (map) {
+            map(domainObject, returnObj);
+        }
+
+        return returnObj;
+    }
 };
-
-module.exports =  new Map();
