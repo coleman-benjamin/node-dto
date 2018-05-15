@@ -14,28 +14,28 @@ const DTO = function() {
 
 /*
     Tests input data against the DTO definition, and returns input untouched if all valid.
-    Wrap this call in a try catch, and whatever is caught will be thrown
 */
 
-DTO.prototype.test = function(definition, input) {
+DTO.prototype.test = function(input, dtoDefinition, callback) {
     try {
-        validation.testFieldNames(definition, input);
-        validation.testRequired(definition, input);
-        validation.testTypes(definition, input);
-        return input;
+        validation.testFieldNames(dtoDefinition, input);
+        validation.testRequired(dtoDefinition, input);
+        validation.testTypes(dtoDefinition, input);
+        callback(null, input);
     } catch(e) {
-        throw e;
+        callback(e);
     }
 };
 
 /*
     Maps
  */
-DTO.prototype.mapTo = function(domainObject, dtoDefinition, map) {
+DTO.prototype.mapTo = function(domainObject, dtoDefinition, map, callback) {
     try {
-        return mapper.mapTo(domainObject, dtoDefinition, map);
+        let mappedDto = mapper.mapTo(domainObject, dtoDefinition, map);
+        callback(null, mappedDto);
     } catch(e) {
-        throw e;
+        callback(e);
     }
 };
 
