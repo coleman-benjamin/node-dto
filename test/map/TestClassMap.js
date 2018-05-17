@@ -5,6 +5,7 @@
 */
 
 module.exports = {
+	"id" : "field1",
 	"name" : "field2",
 	"boot_size" : "field7"
 };

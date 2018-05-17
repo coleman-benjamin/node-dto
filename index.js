@@ -42,10 +42,15 @@ module.exports = {
     /*
         Maps DTO object to domain object
     */
-    mapFrom : function(mapId, dtoObject, callback) {
+    mapFrom : function(mapId, dtoObject, dtoDefinition, callback) {
         try {
-            let mappedDomain = mapper.mapFrom(mapId, dtoObject);
-            callback(null, mappedDomain);
+            this.test(dtoObject, dtoDefinition, (err, result) => {
+                if (err) callback(err);
+                else {
+                    let mappedDomain = mapper.mapFrom(mapId, result);
+                    callback(null, mappedDomain);
+                }
+            });
         } catch(e) {
             callback(e);
         }
@@ -62,9 +67,9 @@ module.exports = {
         Register all mappings within a directory
     */
     registerMappings : function(mappingDir) {
-        let functionsList = load.loadFunctionsListByPath(mappingDir);
-        for (let f in functionsList) {
-            mapper.addMap(f, functionsList[f]);
+        let exportList = load.loadByPath(mappingDir);
+        for (let e in exportList) {
+            mapper.addMap(e, exportList[e]);
         }
     }
 };

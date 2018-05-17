@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 module.exports = {
-    loadFunctionsListByPath : function(dir) {
+    loadByPath : function(dir) {
         if (dir.charAt(dir.length - 1) !== "/" || dir.charAt(dir.length - 1) !== "\\") {
             dir += "/";
         }

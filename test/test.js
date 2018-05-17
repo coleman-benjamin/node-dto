@@ -150,18 +150,19 @@ describe('Input Validation Summary', () => {
             field4 : false
         };
         DTO.mapTo("TestClassMap", testInput, TestClassDto, (err, result) => {
-            assert.equal(JSON.stringify(result), "{\"field4\":false,\"field2\":\"The Name\",\"field7\":12}");
+            assert.equal(JSON.stringify(result), "{\"field4\":false,\"field1\":1,\"field2\":\"The Name\",\"field7\":12}");
         });
 	});
 
     it("should map a DTO object to a domain object", () => {
         let testInput = {
+            field1 : 1,
             field4 : false,
             field2 : "The Name",
             field7 : 12
         };
-       DTO.mapFrom("TestClassMap", testInput, (err, result) => {
-           assert.equal(JSON.stringify(result), "{\"name\":\"The Name\",\"boot_size\":12,\"field4\":false}",);
+       DTO.mapFrom("TestClassMap", testInput, TestClassDto, (err, result) => {
+           assert.equal(JSON.stringify(result), "{\"id\":1,\"name\":\"The Name\",\"boot_size\":12,\"field4\":false}",);
        });
     });
 });
