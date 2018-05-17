@@ -3,7 +3,6 @@ const assert = chai.assert;
 
 const DTO = require("../index");
 const TestClassDto = require("./TestClassDto");
-const TestClassDomain = require("./TestClassDomain");
 
 DTO.registerMappings(__dirname + "/map");
 
@@ -143,7 +142,14 @@ describe('Input Validation Summary', () => {
     });
 
 	it("should map a domain object to a DTO object", () => {
-        DTO.mapTo("TestClassMap", TestClassDomain, TestClassDto, (err, result) => {
+	    let testInput = {
+            id : 1,
+            name : "The Name",
+            password : "Super Secret lolz",
+            boot_size : 12,
+            field4 : false
+        };
+        DTO.mapTo("TestClassMap", testInput, TestClassDto, (err, result) => {
             assert.equal(JSON.stringify(result), "{\"field4\":false,\"field2\":\"The Name\",\"field7\":12}");
         });
 	});
