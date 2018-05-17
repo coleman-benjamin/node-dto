@@ -40,6 +40,18 @@ module.exports = {
     },
 
     /*
+        Maps DTO object to domain object
+    */
+    mapFrom : function(mapId, dtoObject, callback) {
+        try {
+            let mappedDomain = mapper.mapFrom(mapId, dtoObject);
+            callback(null, mappedDomain);
+        } catch(e) {
+            callback(e);
+        }
+    },
+
+    /*
         Register a mapping
     */
     addMap : function(mapId, map) {
